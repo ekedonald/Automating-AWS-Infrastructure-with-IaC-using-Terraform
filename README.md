@@ -14,3 +14,9 @@ for bucket in s3.buckets.all():
 ```
 
 ## VPC | Subnets | Security Groups
+
+Open your Visual Studio Code and:
+* Create a folder called `PBL`
+* Create a file in the folder and name it `main.tf`
+
+The setup should look like the image shown below:
