@@ -20,3 +20,10 @@ Open your Visual Studio Code and:
 * Create a file in the folder and name it `main.tf`
 
 The setup should look like the image shown below:
+
+_Set up Terraform CLI as per [this instruction](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)_.
+
+## Provider & VPC Resource Section
+* Add `AWS` as a provider and a resource to create a VPC in the `main.tf` file. _(The **Provider** block informs Terraform that we intend to build infrastructure within AWS and the **Resource** block will create a VPC)_.
+
+**Note**: You can chnage the configuration above to create your VPC in a region that is closer t you.
