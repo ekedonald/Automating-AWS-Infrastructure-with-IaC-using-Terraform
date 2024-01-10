@@ -52,7 +52,7 @@ resource "aws_vpc" "main" {
 
 The following observations were made after executing the `terraform apply` command:
 
-1. A new file is created `terraform.tfstate`. This is how terraform keeps itself up to date witht he exact state of the infrastructure. It reads this file to know what already exists, what should be added or destroyed based on the entire terraform code that is being developed.
+1. A new file is created `terraform.tfstate`. This is how terraform keeps itself up to date with the exact state of the infrastructure. It reads this file to know what already exists, what should be added or destroyed based on the entire terraform code that is being developed.
 
 2. If you also observed closely, you would realise that another file `terraform.tfstate.lock.info` gets created during planning and apply. But this file gets deleted immediately. This is what Terraform uses to track who is running its code against the infrastructure at any point in time. This is very important for teams working on the same Terraform repository at the same time. The lock prevents a user from executing Terraform configuration against the same infrastructure when another user is doing the same. It prevents duplicates and conflicts.
 
