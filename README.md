@@ -160,3 +160,26 @@ Run the `terrafom destroy` command and type `yes` to destroy to the current infr
 **Fixing Multiple Resource Blocks**: This is where concepts like **Loops & Data Sources** are introduced.
 
 Terrafrom has a functionality that allows us to pull data which exposes information to us. For example, every region has Availability Zones (AZ). Different regions have from 2 t0 4 Availability Zones. With over 20 geographic regions and over 70 Availability Zones served by AWS, it is impossible to keep up with the latest information by hard coding the names of Availability Zones. Hence, we will explore the use of Terraforms's **Data Sources** to fetch the information outside of Terraform. In this case, from **AWS**.
+
+Let us fetch Availability Zones from AWS and replace the hard coded value in the subnet's `availabilty_zone` section.
+
+```sh
+        # Get list of availability zones
+        data "aws_availability_zones" "available" {
+        state = "available"
+        }
+```
+
+To make use of this new `data` resource, we will need to introduce a `count` argument in the subnet block as shown below:
+
+```sh
+    # Create public subnet1
+    resource "aws_subnet" "public" { 
+        count                   = 2
+        vpc_id                  = aws_vpc.main.id
+        cidr_block              = "172.16.1.0/24"
+        map_public_ip_on_launch = true
+        availability_zone       = data.aws_availability_zones.available.names[count.index]
+
+    }
+```
