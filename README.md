@@ -137,14 +137,6 @@ Run the `terrafom destroy` command and type `yes` to destroy to the current infr
         default ="true" 
     }
 
-    variable "enable_classiclink" {
-        default = "false"
-    }
-
-    variable "enable_classiclink_dns_support" {
-        default = "false"
-    }
-
     provider "aws" {
     region = var.region
     }
