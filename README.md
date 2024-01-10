@@ -59,3 +59,9 @@ The following observations were made after executing the `terraform apply` comma
 Its content is usually in the format shown below:
 
 It is a `json` format file that stores information about a user: user's `ID`, what operation he/she is doing, timestamp and location of the `state` file.
+
+## Subnets Resource Section
+According to our architectural design, we require 6 subnets:
+* 2 Public Subnets
+* 2 Private Subnets for Webservers
+* 2 Private Subnets for Data Layer
