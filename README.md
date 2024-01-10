@@ -157,3 +157,6 @@ Run the `terrafom destroy` command and type `yes` to destroy to the current infr
     }
 ```
 
+**Fixing Multiple Resource Blocks**: This is where concepts like **Loops & Data Sources** are introduced.
+
+Terrafrom has a functionality that allows us to pull data which exposes information to us. For example, every region has Availability Zones (AZ). Different regions have from 2 t0 4 Availability Zones. With over 20 geographic regions and over 70 Availability Zones served by AWS, it is impossible to keep up with the latest information by hard coding the names of Availability Zones. Hence, we will explore the use of Terraforms's **Data Sources** to fetch the information outside of Terraform. In this case, from **AWS**.
