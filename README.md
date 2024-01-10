@@ -183,3 +183,11 @@ To make use of this new `data` resource, we will need to introduce a `count` arg
 
     }
 ```
+
+Let us quickly understand what is going on here.
+1. `count` tells us that we need 2 subnets. Therefore, Terraform will invoke a loop to create 2 subnets.
+2. `data` resource will return a list object that contains a list of Availabilty Zones. Internally, terraform will receive data like this:
+
+```sh
+  ["us-east-1a", "us-east-1b", "us-east-1c"]
+```
