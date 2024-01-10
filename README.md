@@ -191,3 +191,7 @@ Let us quickly understand what is going on here.
 ```sh
   ["us-east-1a", "us-east-1b", "us-east-1c"]
 ```
+
+Each of them is an index, the first one is index `0` while the other is index `1`. If the data returned had more than 2 records then the index numbers would continue to increment.
+
+Therefore, each tiem Terraform goes into a loop to create a subnet, it must be created in the retrieved Availability Zone from the list. Each loop will need the index number to determine what Availability ZOne the subnet will be created. That is why we have `data.aws_availability_zones.available.names[count.index]` as the value for `availability_zone`. When the first loop runs, the first index will be `0` therefore the Availability Zone will be `us-east-1a`. The pattern will repeat for the second loop.
