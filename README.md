@@ -92,3 +92,9 @@ _In order to create 2 subnets, we must declare 2 **resource blocks** (i.e. one f
 * Run the `terraform plan` command.
 
 * Run the `terraform apply` command.
+
+The following observations were made after executing the `terraform apply` command:
+
+1. **Hard Coded Values**: Rememeber our best practice hint from the beginning? Both the `availability_zone` and `cidr_block` arguments are hard coded. We should always endeavour to make our configurations dynamic and reusable.
+
+2. **Multiple Resource Block**: Notice that we have declared multiple resource blocks for each subnet in the code. This is bad coding practice. We need to create a single resoure that can dynamically create resources without specifying multiple blocks. Imagine if we wanted to create 10 subnets, our code would look very clumsy. So we need to optimize this by introducing a `count` argument.
