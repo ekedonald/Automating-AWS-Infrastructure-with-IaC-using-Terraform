@@ -45,7 +45,7 @@ resource "aws_vpc" "main" {
 
 **Note**: There is a new directory created called `.terraform\...`, this is where Terraform keeps plugins. Generally, it is safe to delete this folder. It just means you must execute `terraform init` again to download them.
 
-* Let us create the only resource we just defined `aws_vpc`. But before we do that, run `terraform plan` command to check what Terraform intends to create before we tell it to go ahead and create it.
+* Let us create the only resource we just defined `aws_vpc`. But before we do that, run the `terraform plan` command to check what Terraform intends to create before we tell it to go ahead and create it.
 
 * Run the `terraform apply` command if you are satisfied with the planned changes.
 
@@ -55,3 +55,7 @@ The following observations were made after executing the `terraform apply` comma
 1. A new file is created `terraform.tfstate`. This is how terraform keeps itself up to date witht he exact state of the infrastructure. It reads this file to know what already exists, what should be added or destroyed based on the entire terraform code that is being developed.
 
 2. If you also observed closely, you would realise that another file `terraform.tfstate.lock.info` gets created during planning and apply. But this file gets deleted immediately. This is what Terraform uses to track who is running its code against the infrastructure at any point in time. This is very important for teams working on the same Terraform repository at the same time. The lock prevents a user from executing Terraform configuration against the same infrastructure when another user is doing the same. It prevents duplicates and conflicts.
+
+Its content is usually in the format shown below:
+
+It is a `json` format file that stores information about a user: user's `ID`, what operation he/she is doing, timestamp and location of the `state` file.
