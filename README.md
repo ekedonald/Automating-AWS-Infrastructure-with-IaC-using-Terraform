@@ -88,3 +88,7 @@ According to our architectural design, we require 6 subnets:
 ```
 
 _In order to create 2 subnets, we must declare 2 **resource blocks** (i.e. one for each subnet). The `vpc_id` argument is used to reference the value of the VPC `id` by setting it to `aws_vpc.main.id`. This way, Terraform knows inside which VPC to create the subnet._
+
+* Run the `terraform plan` command.
+
+* Run the `terraform apply` command.
