@@ -86,3 +86,5 @@ According to our architectural design, we require 6 subnets:
     availability_zone          = "us-east-1b"
 }
 ```
+
+_In order to create 2 subnets, we must declare 2 **resource blocks** (i.e. one for each subnet). The `vpc_id` argument is used to reference the value of the VPC `id` by setting it to `aws_vpc.main.id`. This way, Terraform knows inside which VPC to create the subnet._
