@@ -102,4 +102,58 @@ The following observations were made after executing the `terraform apply` comma
 #### Fixing The Problems By Code Refactoring
 The following steps are taken to improve our code by refactoring it:
 
-* Run the `terrafom destroy` command and type `yes` to destroy to the current infrastructure. _**Note:** Do not destroy an infrastructure that has been deployed to production._
+Run the `terrafom destroy` command and type `yes` to destroy to the current infrastructure. _**Note:** Do not destroy an infrastructure that has been deployed to production._
+
+**Fixing Hard Coded Values**: Variables are introduced to remove hard coding. 
+
+* Starting with the provider block, declare a variable named `region`, give it a default value and update the provider section by referring to the declared variable.
+
+```sh
+    variable "region" {
+        default = "us-east-1"
+    }
+
+    provider "aws" {
+        region = var.region
+    }
+```
+
+* Do the same to the `cidr` value in the `vpc` block and all the other arguments.
+
+```sh
+    variable "region" {
+        default = "us-east-1"
+    }
+
+    variable "vpc_cidr" {
+        default = "172.16.0.0/16"
+    }
+
+    variable "enable_dns_support" {
+        default = "true"
+    }
+
+    variable "enable_dns_hostnames" {
+        default ="true" 
+    }
+
+    variable "enable_classiclink" {
+        default = "false"
+    }
+
+    variable "enable_classiclink_dns_support" {
+        default = "false"
+    }
+
+    provider "aws" {
+    region = var.region
+    }
+
+    # Create VPC
+    resource "aws_vpc" "main" {
+    cidr_block                     = var.vpc_cidr
+    enable_dns_support             = var.enable_dns_support 
+    enable_dns_hostnames           = var.enable_dns_support
+    }
+```
+
