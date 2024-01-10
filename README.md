@@ -190,4 +190,4 @@ Therefore, each tiem Terraform goes into a loop to create a subnet, it must be c
 
 But we still have a problem. If we run Terraform with this configuration, it may succeed for the first time but by the time it goes into the second loop, it will fail because we still have `cidr_block` hard coded. The same `cidr_block` cannot be created twice within the same VPC. So we have little more work to do.
 
-#### Let's Make `cidr_block` Dynamic
+#### Let's Make The `cidr_block` Dynamic
