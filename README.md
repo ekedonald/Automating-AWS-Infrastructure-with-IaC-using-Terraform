@@ -65,3 +65,24 @@ According to our architectural design, we require 6 subnets:
 * 2 Public Subnets
 * 2 Private Subnets for Webservers
 * 2 Private Subnets for Data Layer
+
+### Creating the first 2 Public Subnets
+* Copy and paste the configuration below to the `main.tf` file:
+
+```sh
+# Create public subnets1
+    resource "aws_subnet" "public1" {
+    vpc_id                     = aws_vpc.main.id
+    cidr_block                 = "172.16.0.0/24"
+    map_public_ip_on_launch    = true
+    availability_zone          = "us-east-1a"
+}
+
+# Create public subnet2
+    resource "aws_subnet" "public2" {
+    vpc_id                     = aws_vpc.main.id
+    cidr_block                 = "172.16.1.0/24"
+    map_public_ip_on_launch    = true
+    availability_zone          = "us-east-1b"
+}
+```
