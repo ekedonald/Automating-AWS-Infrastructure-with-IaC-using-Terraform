@@ -249,3 +249,12 @@ Now we can simply update the public subnet block like this:
 The following observations were made:
 1. WHat we have now is sufficient to create the subnet resource required but it is not satisfying our business requimrent of just `2` subnets.
 2. The `length` function will return number 3 to the `count` argument but what we actually need is `2`.
+
+Now lets fix this:
+* Declare a variabe to store the desired number of public subnets and set the default value to `2`.
+
+```sh
+  variable "preferred_number_of_public_subnets" {
+      default = 2
+}
+```
