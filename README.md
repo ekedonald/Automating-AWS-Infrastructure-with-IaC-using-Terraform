@@ -277,3 +277,5 @@ Now lets break it down:
 2. `?` and `length(data.aws_availability_zones.available.names)` means if the first part is true, then use this. In other words, if preferred number of public subents is `null` (not known) then set the value to the data returned by `length` function.
 3. `:` and `var.preferred_number_of_public_subnets` means if the first condition is false (i.e. preferred number of public subnets is `not null`) then set the value to whatever is defined in `var.preferred_number_of_public_subnets`.
 
+The entire configuration on the `main.tf` file
+should now look like this:
