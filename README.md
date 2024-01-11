@@ -203,3 +203,6 @@ The `cidrsubnet()` function is introduced, it accepts 3 parameters. The first us
         availability_zone       = data.aws_availability_zones.available.names[count.index]
     }
 ```
+
+The `cidrsubnet()` function works like an algorithm to dynamically create a subnet CIDR per Availability Zone. Regardless of the number of subents created, it takes care of the cidr value per subnet.
+
