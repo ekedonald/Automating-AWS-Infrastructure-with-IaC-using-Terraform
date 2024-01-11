@@ -211,4 +211,8 @@ Its parameters are:
 2. `newbits` parameter is the number of additional bits with which to extend the prefix. For example, if given a prefix ending with /16 and a newbits value of 4, the resulting subnet address will have a length 0f /20.
 3. `netnum` parameter is a whole number that can be represented as a binary integer with no more than `newbits` binary digits which will be used to populate the additional bits added to the prefix.
 
-You can experiment how this works by 
+You can experiment how this works by entering the `terraform console` and keep changing the figure to see the output.
+* Open your terminal and run `terraform cosole` command
+* Type `cidrsubnet("172.16.0.0/16", 4, 0)` and hit enter
+* Notice the output has an increase in the prefix length by 4
+* Type `exit` and hit enter to log out of the console.
