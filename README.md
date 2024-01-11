@@ -191,3 +191,16 @@ Therefore, each tiem Terraform goes into a loop to create a subnet, it must be c
 But we still have a problem. If we run Terraform with this configuration, it may succeed for the first time but by the time it goes into the second loop, it will fail because we still have `cidr_block` hard coded. The same `cidr_block` cannot be created twice within the same VPC. So we have little more work to do.
 
 #### Let's Make The `cidr_block` Dynamic
+The `cidrsubnet()` function is introduced, it accepts 3 parameters. The first use cases will be updating the configuration then exploring its internals.
+
+```sh
+    # Create public subnet1
+    resource "aws_subnet" "public" { 
+        count                   = 2
+        vpc_id                  = aws_vpc.main.id
+        cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
+        map_public_ip_on_launch = true
+        availability_zone       = data.aws_availability_zones.available.names[count.index]
+
+    }
+```
