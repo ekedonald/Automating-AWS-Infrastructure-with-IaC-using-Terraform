@@ -242,7 +242,6 @@ Now we can simply update the public subnet block like this:
         cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
         map_public_ip_on_launch = true
         availability_zone       = data.aws_availability_zones.available.names[count.index]
-
     }
 ```
 
