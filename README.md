@@ -326,3 +326,5 @@ resource "aws_subnet" "public" {
   availability_zone       = data.aws_availability_zones.available.names[count.index]
 }
 ```
+
+_**Note**: Try changing the value of `preferred_number_of_public_subnets` variable to `null` and notice how many subnets get created._
