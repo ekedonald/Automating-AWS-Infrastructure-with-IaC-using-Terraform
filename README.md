@@ -109,44 +109,44 @@ Run the `terrafom destroy -auto-approve` command to destroy to the current infra
 * Starting with the provider block, declare a variable named `region`, give it a default value and update the provider section by referring to the declared variable.
 
 ```sh
-    variable "region" {
-        default = "us-east-1"
-    }
+variable "region" {
+    default = "us-east-1"
+}
 
-    provider "aws" {
-        region = var.region
-    }
+provider "aws" {
+    region = var.region
+}
 ```
 
 * Do the same to the `cidr` value in the `vpc` block and all the other arguments.
 
 ```sh
-    variable "region" {
-        default = "us-east-1"
-    }
+variable "region" {
+    default = "us-east-1"
+}
 
-    variable "vpc_cidr" {
-        default = "172.16.0.0/16"
-    }
+variable "vpc_cidr" {
+    default = "172.16.0.0/16"
+}
 
-    variable "enable_dns_support" {
-        default = "true"
-    }
+variable "enable_dns_support" {
+    default = "true"
+}
 
-    variable "enable_dns_hostnames" {
-        default ="true" 
-    }
+variable "enable_dns_hostnames" {
+    default ="true" 
+}
 
-    provider "aws" {
+provider "aws" {
     region = var.region
-    }
+}
 
-    # Create VPC
-    resource "aws_vpc" "main" {
+# Create VPC
+resource "aws_vpc" "main" {
     cidr_block                     = var.vpc_cidr
     enable_dns_support             = var.enable_dns_support 
     enable_dns_hostnames           = var.enable_dns_support
-    }
+}
 ```
 
 **Fixing Multiple Resource Blocks**: This is where concepts like **Loops & Data Sources** are introduced.
@@ -156,24 +156,23 @@ Terrafrom has a functionality that allows us to pull data which exposes informat
 Let us fetch Availability Zones from AWS and replace the hard coded value in the subnet's `availabilty_zone` section.
 
 ```sh
-        # Get list of availability zones
-        data "aws_availability_zones" "available" {
-        state = "available"
-        }
+# Get list of availability zones
+data "aws_availability_zones" "available" {
+    state = "available"
+}
 ```
 
 To make use of this new `data` resource, we will need to introduce a `count` argument in the subnet block as shown below:
 
 ```sh
-    # Create public subnet1
-    resource "aws_subnet" "public" { 
-        count                   = 2
-        vpc_id                  = aws_vpc.main.id
-        cidr_block              = "172.16.1.0/24"
-        map_public_ip_on_launch = true
-        availability_zone       = data.aws_availability_zones.available.names[count.index]
-
-    }
+# Create public subnet1
+resource "aws_subnet" "public" { 
+    count                   = 2
+    vpc_id                  = aws_vpc.main.id
+    cidr_block              = "172.16.1.0/24"
+    map_public_ip_on_launch = true
+    availability_zone       = data.aws_availability_zones.available.names[count.index]
+}
 ```
 
 Let us quickly understand what is going on here.
@@ -194,14 +193,14 @@ But we still have a problem. If we run Terraform with this configuration, it may
 The `cidrsubnet()` function is introduced, it accepts 3 parameters. The first use cases will be updating the configuration then exploring its internals.
 
 ```sh
-    # Create public subnet1
-    resource "aws_subnet" "public" { 
-        count                   = 2
-        vpc_id                  = aws_vpc.main.id
-        cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
-        map_public_ip_on_launch = true
-        availability_zone       = data.aws_availability_zones.available.names[count.index]
-    }
+# Create public subnet1
+resource "aws_subnet" "public" { 
+    count                   = 2
+    vpc_id                  = aws_vpc.main.id
+    cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
+    map_public_ip_on_launch = true
+    availability_zone       = data.aws_availability_zones.available.names[count.index]
+}
 ```
 
 The `cidrsubnet()` function works like an algorithm to dynamically create a subnet CIDR per Availability Zone. Regardless of the number of subents created, it takes care of the cidr value per subnet.
@@ -236,13 +235,13 @@ Now we can simply update the public subnet block like this:
 
 ```sh
 # Create public subnet1
-    resource "aws_subnet" "public" { 
-        count                   = length(data.aws_availability_zones.available.names)
-        vpc_id                  = aws_vpc.main.id
-        cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
-        map_public_ip_on_launch = true
-        availability_zone       = data.aws_availability_zones.available.names[count.index]
-    }
+resource "aws_subnet" "public" { 
+    count                   = length(data.aws_availability_zones.available.names)
+    vpc_id                  = aws_vpc.main.id
+    cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
+    map_public_ip_on_launch = true
+    availability_zone       = data.aws_availability_zones.available.names[count.index]
+}
 ```
 
 The following observations were made:
@@ -253,8 +252,8 @@ Now lets fix this:
 * Declare a variabe to store the desired number of public subnets and set the default value to `2`.
 
 ```sh
-  variable "preferred_number_of_public_subnets" {
-      default = 2
+variable "preferred_number_of_public_subnets" {
+    default = 2
 }
 ```
 
