@@ -258,3 +258,17 @@ Now lets fix this:
       default = 2
 }
 ```
+
+* Update the `count` argument with a condito. Terraform needs to check first if there is a desired number of subnets, otherwise use the data returned by the `length` function. See how it is presented below:
+
+```sh
+# Create public subnets
+resource "aws_subnet" "public" {
+  count  = var.preferred_number_of_public_subnets == null ? length(data.aws_availability_zones.available.names) : var.preferred_number_of_public_subnets   
+  vpc_id = aws_vpc.main.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
+  map_public_ip_on_launch = true
+  availability_zone       = data.aws_availability_zones.available.names[count.index]
+
+}
+```
