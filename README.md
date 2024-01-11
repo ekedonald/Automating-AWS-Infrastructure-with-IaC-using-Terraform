@@ -206,3 +206,9 @@ The `cidrsubnet()` function is introduced, it accepts 3 parameters. The first us
 
 The `cidrsubnet()` function works like an algorithm to dynamically create a subnet CIDR per Availability Zone. Regardless of the number of subents created, it takes care of the cidr value per subnet.
 
+Its parameters are:
+1. `prefix` parameter must be given in CIDR notation same as for VPC.
+2. `newbits` parameter is the number of additional bits with which to extend the prefix. For example, if given a prefix ending with /16 and a newbits value of 4, the resulting subnet address will have a length 0f /20.
+3. `netnum` parameter is a whole number that can be represented as a binary integer with no more than `newbits` binary digits which will be used to populate the additional bits added to the prefix.
+
+You can experiment how this works by 
