@@ -269,6 +269,11 @@ resource "aws_subnet" "public" {
   cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
   map_public_ip_on_launch = true
   availability_zone       = data.aws_availability_zones.available.names[count.index]
-
 }
 ```
+
+Now lets break it down:
+1. `car.preferred_number_pf_public_subnets == null` checks if the value of the variable is set to `null` or has some value defined.
+2. `?` and `length(data.aws_availability_zones.available.names)` means if the first part is true, then use this. In other words, if preferred number of public subents is `null` (not known) then set the value to the data returned by `length` function.
+3. `:` and `var.preferred_number_of_public_subnets` means if the first condition is false (i.e. preferred number of public subnets is `not null`) then set the value to whatever is defined in `var.preferred_number_of_public_subnets`.
+
