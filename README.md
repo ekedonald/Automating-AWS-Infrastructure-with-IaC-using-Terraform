@@ -216,3 +216,6 @@ You can experiment how this works by entering the `terraform console` and keep c
 * Type `cidrsubnet("172.16.0.0/16", 4, 0)` and hit enter
 * Notice the output has an increase in the prefix length by 4
 * Type `exit` and hit enter to log out of the console.
+
+#### Removing Hard Coded `count` Value
+If we cannot hard code a value we want, then we need a way to dynamically provide the value based on some input. Since the `data` resource returns all the Availability Zones within a region, it makes sense to count the number of Availability Zones returned and pass that number to the `count` argument.
