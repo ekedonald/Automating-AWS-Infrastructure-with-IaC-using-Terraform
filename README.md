@@ -280,13 +280,8 @@ The entire configuration on the `main.tf` file
 should now look like this:
 
 ```sh
-# Get list of availability zones
-data "aws_availability_zones" "available" {
-state = "available"
-}
-
 variable "region" {
-      default = "us-east-1"
+    default = "us-east-1"
 }
 
 variable "vpc_cidr" {
@@ -302,11 +297,11 @@ variable "enable_dns_hostnames" {
 }
 
   variable "preferred_number_of_public_subnets" {
-      default = 2
+    default = 2
 }
 
 provider "aws" {
-  region = var.region
+    region = var.region
 }
 
 # Create VPC
@@ -314,6 +309,11 @@ resource "aws_vpc" "main" {
   cidr_block                     = var.vpc_cidr
   enable_dns_support             = var.enable_dns_support 
   enable_dns_hostnames           = var.enable_dns_support
+}
+
+# Get list of availability zones
+data "aws_availability_zones" "available" {
+    state = "available"
 }
 
 # Create public subnets
