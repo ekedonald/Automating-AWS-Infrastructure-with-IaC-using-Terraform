@@ -328,3 +328,5 @@ resource "aws_subnet" "public" {
 ```
 
 _**Note**: Try changing the value of `preferred_number_of_public_subnets` variable to `null` and notice how many subnets get created._
+
+## Variables & tfvars
