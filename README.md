@@ -201,6 +201,5 @@ The `cidrsubnet()` function is introduced, it accepts 3 parameters. The first us
         cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
         map_public_ip_on_launch = true
         availability_zone       = data.aws_availability_zones.available.names[count.index]
-
     }
 ```
