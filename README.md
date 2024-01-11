@@ -47,7 +47,7 @@ resource "aws_vpc" "main" {
 
 * Let us create the only resource we just defined `aws_vpc`. But before we do that, run the `terraform plan` command to check what Terraform intends to create before we tell it to go ahead and create it.
 
-* Run the `terraform apply` command if you are satisfied with the planned changes.
+* Run the `terraform apply` command and type **yes** if you are satisfied with the planned changes.
 
 
 The following observations were made after executing the `terraform apply` command:
@@ -91,9 +91,9 @@ _In order to create 2 subnets, we must declare 2 **resource blocks** (i.e. one f
 
 * Run the `terraform plan` command.
 
-* Run the `terraform apply` command.
+* Run the `terraform apply -auto-approve` command.
 
-The following observations were made after executing the `terraform apply` command:
+The following observations were made after executing the `terraform apply -auto-approve` command:
 
 1. **Hard Coded Values**: Rememeber our best practice hint from the beginning? Both the `availability_zone` and `cidr_block` arguments are hard coded. We should always endeavour to make our configurations dynamic and reusable.
 
@@ -102,7 +102,7 @@ The following observations were made after executing the `terraform apply` comma
 #### Fixing The Problems By Code Refactoring
 The following steps are taken to improve our code by refactoring it:
 
-Run the `terrafom destroy` command and type `yes` to destroy to the current infrastructure. _**Note:** Do not destroy an infrastructure that has been deployed to production._
+Run the `terrafom destroy -auto-approve` command to destroy to the current infrastructure. _**Note:** Do not destroy an infrastructure that has been deployed to production._
 
 **Fixing Hard Coded Values**: Variables are introduced to remove hard coding. 
 
@@ -181,12 +181,12 @@ Let us quickly understand what is going on here.
 2. `data` resource will return a list object that contains a list of Availabilty Zones. Internally, terraform will receive data like this:
 
 ```sh
-  ["us-east-1a", "us-east-1b", "us-east-1c"]
+  ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]
 ```
 
 Each of them is an index, the first one is index `0` while the other is index `1`. If the data returned had more than 2 records then the index numbers would continue to increment.
 
-Therefore, each tiem Terraform goes into a loop to create a subnet, it must be created in the retrieved Availability Zone from the list. Each loop will need the index number to determine what Availability ZOne the subnet will be created. That is why we have `data.aws_availability_zones.available.names[count.index]` as the value for `availability_zone`. When the first loop runs, the first index will be `0` therefore the Availability Zone will be `us-east-1a`. The pattern will repeat for the second loop.
+Therefore, each tiem Terraform goes into a loop to create a subnet, it must be created in the retrieved Availability Zone from the list. Each loop will need the index number to determine what Availability Zone the subnet will be created. That is why we have `data.aws_availability_zones.available.names[count.index]` as the value for `availability_zone`. When the first loop runs, the first index will be `0` therefore the Availability Zone will be `us-east-1a`. The pattern will repeat for the second loop.
 
 But we still have a problem. If we run Terraform with this configuration, it may succeed for the first time but by the time it goes into the second loop, it will fail because we still have `cidr_block` hard coded. The same `cidr_block` cannot be created twice within the same VPC. So we have little more work to do.
 
@@ -222,15 +222,15 @@ If we cannot hard code a value we want, then we need a way to dynamically provid
 
 To do this, we can introduce the `length()` function which basically determines the length of a give list, map or string.
 
-Since `data.aws_availability_zones.available.names` returns a list like `["us-east-1a", "us-east-1b", "us-east-1c"]` we can pass it into a `length` function and get number of the Availability Zones.
+Since `data.aws_availability_zones.available.names` returns a list like `["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]` we can pass it into a `length` function and get number of the Availability Zones.
 
 To test this take the following steps:
 * Run the `terraform console` command
 * Paste the code below:
 ```sh
-lenght(["us-east-1a", "us-east-1b", "us-east-1c"])
+length(["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"])
 ```
-* The output will be `3`.
+* The output will be `6`.
 
 Now we can simply update the public subnet block like this:
 
@@ -247,8 +247,8 @@ Now we can simply update the public subnet block like this:
 ```
 
 The following observations were made:
-1. WHat we have now is sufficient to create the subnet resource required but it is not satisfying our business requimrent of just `2` subnets.
-2. The `length` function will return number 3 to the `count` argument but what we actually need is `2`.
+1. What we have now is sufficient to create the subnet resource required but it is not satisfying our business requimrent of just `2` subnets.
+2. The `length` function will return number **6** to the `count` argument but what we actually need is `2`.
 
 Now lets fix this:
 * Declare a variabe to store the desired number of public subnets and set the default value to `2`.
@@ -273,7 +273,7 @@ resource "aws_subnet" "public" {
 ```
 
 Now lets break it down:
-1. `car.preferred_number_pf_public_subnets == null` checks if the value of the variable is set to `null` or has some value defined.
+1. `var.preferred_number_pf_public_subnets == null` checks if the value of the variable is set to `null` or has some value defined.
 2. `?` and `length(data.aws_availability_zones.available.names)` means if the first part is true, then use this. In other words, if preferred number of public subents is `null` (not known) then set the value to the data returned by `length` function.
 3. `:` and `var.preferred_number_of_public_subnets` means if the first condition is false (i.e. preferred number of public subnets is `not null`) then set the value to whatever is defined in `var.preferred_number_of_public_subnets`.
 
