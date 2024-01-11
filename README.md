@@ -219,3 +219,16 @@ You can experiment how this works by entering the `terraform console` and keep c
 
 #### Removing Hard Coded `count` Value
 If we cannot hard code a value we want, then we need a way to dynamically provide the value based on some input. Since the `data` resource returns all the Availability Zones within a region, it makes sense to count the number of Availability Zones returned and pass that number to the `count` argument.
+
+To do this, we can introduce the `length()` function which basically determines the length of a give list, map or string.
+
+Since `data.aws_availability_zones.available.names` returns a list like `["us-east-1a", "us-east-1b", "us-east-1c"]` we can pass it into a `length` function and get number of the Availability Zones.
+
+To test this take the following steps:
+* Run the `terraform console` command
+* Paste the code below:
+```sh
+lenght(["us-east-1a", "us-east-1b", "us-east-1c"])
+```
+* The output will be `3`.
+
