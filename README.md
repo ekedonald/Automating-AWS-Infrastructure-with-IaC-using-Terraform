@@ -21,7 +21,7 @@ _**Note**: If you do not have homebrew installed on your macOS, [install it here
 * Create an IAM user, name it `terraform` _(ensure that the user has only programatic access to your AWS account)_ and grant this user `AdministratorAccess` permissions.
 * Copy the **secret access key** and **acces key ID** and save them in a notepad temporarily.
 
-* Run the `aws configure` command to have access to AWSCLI using the the Access Keys you copied when creating the `terraform` IAM user.
+* Run the `aws configure` command to have access to AWSCLI and paste the the **Access Keys** you copied when creating the `terraform` IAM user.
 
 * Create an `s3` bucket using the command shown below:
 
