@@ -378,6 +378,10 @@ resource "aws_subnet" "public" {
 
 _**Note**: Try changing the value of `preferred_number_of_public_subnets` variable to `null` and notice how many subnets get created._
 
+Run the `terraform apply -auto-approve` command to apply the changes.
+
+Run the `terraform destroy -auto-approve` command to delete all the AWS resources.
+
 ## Variables & tfvars
 ### Intoducing variables.tf & terraform.tfvars
 Instead of having a long list of variables in the `main.tf` file, we can make our code a lot more readable and better structured by moving put some parts of the configuration content to other files. Hence, we will put all variable declarations in a separate file and provide non-default values to each of them.
