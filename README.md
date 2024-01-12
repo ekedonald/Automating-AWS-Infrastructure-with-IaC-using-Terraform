@@ -238,6 +238,8 @@ Therefore, each time Terraform goes into a loop to create a subnet, it must be c
 
 But we still have a problem. When you the `terraform apply -auto-approve` command with this configuration, it may succeed for the first time but by the time it goes into the second loop, it will fail because we still have `cidr_block` hard coded. The same `cidr_block` cannot be created twice within the same VPC. So we have little more work to do.
 
+Run the `terraform destroy -auto-approve` command to remove all the AWS resources.
+
 #### Let's Make The `cidr_block` Dynamic
 The `cidrsubnet()` function is introduced, it accepts 3 parameters. The first use cases will be updating the configuration then exploring its internals.
 
