@@ -29,7 +29,23 @@ _**Note**: If you do not have homebrew installed on your macOS, [install it here
 aws s3api create-bucket --bucket <bucket_name> --region <aws_region>
 ```
 
-* 
+* Install python and boto3 using the following commands:
+
+```sh
+brew install python
+```
+
+```sh
+python -m ensurepip
+```
+
+```sh
+pip install boto3
+```
+
+```sh
+python3 -m pip install --upgrade pip
+```
 
 * Configure programmatic access from your workstation to connect to AWS using thr access keys copied above and a [Python SDK (boto3)](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html). Ensure you have [Python 3.6](https://www.python.org/downloads/) or higher on your workstation.
 
