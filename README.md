@@ -1,6 +1,16 @@
 # Automating AWS Infrastructure with IaC using Terraform
 
 ## Prerequisites before you begin writing Terraform code
+* Poen your terminal and install AWSCLI Version 2 using the commands shown below:
+
+```sh
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+```
+
+```sh
+sudo installer -pkg ./AWSCLIv2.pkg -target /
+```
+
 * Create an IAM user, name it `terraform` _(ensure that the user has only programatic access to your AWS account)_ and grant this user `AdministratorAccess` permissions.
 * Copy the **secret access key** and **acces key ID** and save them in a notepad temporarily.
 * Configure programmatic access from your workstation to connect to AWS using thr access keys copied above and a [Python SDK (boto3)](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html). Ensure you have [Python 3.6](https://www.python.org/downloads/) or higher on your workstation.
