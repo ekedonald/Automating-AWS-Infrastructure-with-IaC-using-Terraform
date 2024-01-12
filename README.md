@@ -1,7 +1,7 @@
 # Automating AWS Infrastructure with IaC using Terraform
 
 ## Prerequisites before you begin writing Terraform code
-* Poen your terminal and install AWSCLI Version 2 using the commands shown below:
+* Open your terminal and install AWSCLI Version 2 using the commands shown below:
 
 ```sh
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
