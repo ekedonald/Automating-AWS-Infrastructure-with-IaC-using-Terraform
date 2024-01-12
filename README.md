@@ -403,3 +403,7 @@ enable_dns_hostnames = "true"
 
 preferred_number_of_public_subnets = 2
 ```
+
+Run the `terraform plan` to ensure that everything works.
+
+Run the `terraform apply -auto-approve` command to execute the planned changes.
