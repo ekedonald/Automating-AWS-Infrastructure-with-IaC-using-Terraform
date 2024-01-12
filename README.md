@@ -329,4 +329,10 @@ _**Note**: Try changing the value of `preferred_number_of_public_subnets` variab
 
 ## Variables & tfvars
 ### Intoducing variables.tf & terraform.tfvars
-Instead of having a long list of variables in the `main.tf` file, we can make our code a lot more readable and better structured by moving put some parts of the configuration content to other files.
+Instead of having a long list of variables in the `main.tf` file, we can make our code a lot more readable and better structured by moving put some parts of the configuration content to other files. Hence, we will put all variable declarations in a separate file and provide non-default values to each of them.
+
+The following steps are taken to achieve this:
+1. Create a new file and name it `variables.tf`
+2. Copy all the variable declaratiosn into the new file.
+3. Create another file and name it `teraform.tfvars`
+4. Set values for each of the variables.
