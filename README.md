@@ -89,7 +89,11 @@ cd pbl
 touch main.tf
 ```
 
+![mkdir pbl touch main.tf](./images/2.%20mkdir%20pbl%20cd%20pbl%20touch%20main.tf.png)
+
 The setup should look like the image shown below:
+
+![setup](./images/2.%20setup.png)
 
 _Set up Terraform CLI as per [this instruction](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)_.
 
