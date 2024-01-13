@@ -434,7 +434,11 @@ _**Note**: Try changing the value of `preferred_number_of_public_subnets` variab
 
 Run the `terraform apply -auto-approve` command to apply the changes.
 
+![terraform apply -auto-approve](./images/8.%20terraform%20apply%20-auto-approve.png)
+
 Run the `terraform destroy -auto-approve` command to delete all the AWS resources.
+
+![terraform destroy -auto-approve](./images/8.%20terraform%20destroy%20-auto-approve.png)
 
 ## Variables & tfvars
 ### Intoducing variables.tf & terraform.tfvars
