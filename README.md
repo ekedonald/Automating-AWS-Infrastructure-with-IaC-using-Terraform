@@ -525,4 +525,8 @@ preferred_number_of_public_subnets = 2
 
 Run the `terraform plan` to ensure that everything works.
 
+![terraform plan](./images/10.%20terraform%20plan.png)
+
 Run the `terraform apply -auto-approve` command to execute the planned changes.
+
+![terraform apply](./images/10.%20terraform%20apply.png)
