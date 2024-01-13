@@ -7,15 +7,23 @@
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 ```
 
+![curl awscli](./images/1.%20curl%20awscli.png)
+
 ```sh
 sudo installer -pkg ./AWSCLIv2.pkg -target /
 ```
+
+![sudo installer awscliv2](./images/1.%20sudo%20installer%20awscli.png)
+
 * Install terraform using the command shown below:
 
 ```sh
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 ```
+
+![brew install terraform](./images/1.%20brew%20install%20terraform.png)
+
 _**Note**: If you do not have homebrew installed on your macOS, [install it here](https://brew.sh)_.
 
 * Create an IAM user, name it `terraform` _(ensure that the user has only programatic access to your AWS account)_ and grant this user `AdministratorAccess` permissions.
