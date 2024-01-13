@@ -298,6 +298,8 @@ resource "aws_subnet" "public" {
 }
 ```
 
+![cidr_block dynamic](./images/6.%20cidr_block%20dynamic.png)
+
 The `cidrsubnet()` function works like an algorithm to dynamically create a subnet CIDR per Availability Zone. Regardless of the number of subents created, it takes care of the cidr value per subnet.
 
 Its parameters are:
@@ -310,6 +312,8 @@ You can experiment how this works by entering the `terraform console` and keep c
 * Type `cidrsubnet("172.16.0.0/16", 4, 0)` and hit enter
 * Notice the output has an increase in the prefix length by 4
 * Type `exit` and hit enter to log out of the console.
+
+![terraform console](./images/6.%20terraform%20console.png)
 
 #### Removing Hard Coded `count` Value
 If we cannot hard code a value we want, then we need a way to dynamically provide the value based on some input. Since the `data` resource returns all the Availability Zones within a region, it makes sense to count the number of Availability Zones returned and pass that number to the `count` argument.
@@ -325,6 +329,8 @@ To test this take the following steps:
 length(["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"])
 ```
 * The output will be `6`.
+
+![removing hard coded count value](./images/7.%20removing%20hard%20coded%20count%20-%20value%20terraform%20console.png)
 
 Now we can simply update the public subnet block like this:
 
@@ -420,17 +426,11 @@ resource "aws_subnet" "public" {
 }
 ```
 
-![fixing multiple resource blocks](./images/5.%20fixing%20multiple%20resource%20blocks.png)
-
 _**Note**: Try changing the value of `preferred_number_of_public_subnets` variable to `null` and notice how many subnets get created._
 
 Run the `terraform apply -auto-approve` command to apply the changes.
 
-![terraform apply](./images/5.%20terraform%20apply%20.png)
-
 Run the `terraform destroy -auto-approve` command to delete all the AWS resources.
-
-![terraform destroy](./images/5.%20terraform%20destroy.png)
 
 ## Variables & tfvars
 ### Intoducing variables.tf & terraform.tfvars
