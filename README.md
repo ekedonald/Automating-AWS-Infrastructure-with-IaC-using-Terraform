@@ -176,7 +176,11 @@ _In order to create 2 subnets, we must declare 2 **resource blocks** (i.e. one f
 
 * Run the `terraform plan` command.
 
+![terraform plan](./images/4.%20terraform%20plan.png)
+
 * Run the `terraform apply -auto-approve` command.
+
+![terraform apply -auto-approve](./images/4.%20terraform%20apply%20-auto-approve.png)
 
 The following observations were made after executing the `terraform apply -auto-approve` command:
 
@@ -188,6 +192,8 @@ The following observations were made after executing the `terraform apply -auto-
 The following steps are taken to improve our code by refactoring it:
 
 Run the `terrafom destroy -auto-approve` command to destroy to the current infrastructure. _**Note:** Do not destroy an infrastructure that has been deployed to production._
+
+![terraform destroy -auto-approve](./images/4.%20terraform%20destroy%20-auto-approve.png)
 
 **Fixing Hard Coded Values**: Variables are introduced to remove hard coding. 
 
