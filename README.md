@@ -119,12 +119,19 @@ resource "aws_vpc" "main" {
 
 * Run the `terraform init` command to download the necessary plugins for Terraform to work. _(These plugins are used by `providers` and `provisioners`.)_ 
 
+![terraform init](./images/3.%20terraform%20init.png)
+
 **Note**: There is a new directory created called `.terraform\...`, this is where Terraform keeps plugins. Generally, it is safe to delete this folder. It just means you must execute `terraform init` again to download them.
+
+![.terraform\...](./images/3.%20terraform\....png)
 
 * Let us create the only resource we just defined `aws_vpc`. But before we do that, run the `terraform plan` command to check what Terraform intends to create before we tell it to go ahead and create it.
 
+![terraform plan](./images/3.%20terraform%20plan.png)
+
 * Run the `terraform apply` command and type **yes** if you are satisfied with the planned changes.
 
+![terraform apply](./images/3.%20terraform%20apply.png)
 
 The following observations were made after executing the `terraform apply` command:
 
