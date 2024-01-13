@@ -75,6 +75,8 @@ for bucket in s3.buckets.all():
     print(bucket.name)
 ```
 
+![import boto3](./images/1.%20import%20boto3%20s3.png)
+
 ## VPC | Subnets | Security Groups
 
 Open your Visual Studio Code and:
