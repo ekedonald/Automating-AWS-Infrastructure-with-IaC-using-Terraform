@@ -113,6 +113,8 @@ resource "aws_vpc" "main" {
 }
 ```
 
+![aws provider and vpc](./images/3.%20aws%20provider%20and%20vpc.png)
+
 **Note**: You can change the configuration above to create your VPC in a region that is closer to you.
 
 * Run the `terraform init` command to download the necessary plugins for Terraform to work. _(These plugins are used by `providers` and `provisioners`.)_ 
