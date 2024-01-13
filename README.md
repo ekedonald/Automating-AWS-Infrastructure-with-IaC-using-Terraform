@@ -371,6 +371,8 @@ resource "aws_subnet" "public" {
 }
 ```
 
+![main.tf](./images/8.%20main_tf.png)
+
 Now lets break it down:
 1. `var.preferred_number_pf_public_subnets == null` checks if the value of the variable is set to `null` or has some value defined.
 2. `?` and `length(data.aws_availability_zones.available.names)` means if the first part is true, then use this. In other words, if preferred number of public subents is `null` (not known) then set the value to the data returned by `length` function.
@@ -425,6 +427,8 @@ resource "aws_subnet" "public" {
   availability_zone       = data.aws_availability_zones.available.names[count.index]
 }
 ```
+
+![main.tf](./images/9.%20main_tf.png)
 
 _**Note**: Try changing the value of `preferred_number_of_public_subnets` variable to `null` and notice how many subnets get created._
 
