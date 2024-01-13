@@ -479,6 +479,8 @@ resource "aws_subnet" "public" {
 }
 ```
 
+![main.tf](./images/9.%20main_tf.png)
+
 #### The `variables.tf` file should look like this
 
 ```sh
@@ -503,6 +505,8 @@ variable "enable_dns_hostnames" {
 }
 ```
 
+![variables.tf](./images/9.%20variables_tf.png)
+
 #### The `terraform.tfvars` file should look like this
 
 ```sh
@@ -516,6 +520,8 @@ enable_dns_hostnames = "true"
 
 preferred_number_of_public_subnets = 2
 ```
+
+![terraform.tfvars](./images/9.%20terraform_tfvars.png)
 
 Run the `terraform plan` to ensure that everything works.
 
