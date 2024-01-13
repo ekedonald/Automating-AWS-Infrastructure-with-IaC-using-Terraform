@@ -27,9 +27,12 @@ brew install hashicorp/tap/terraform
 _**Note**: If you do not have homebrew installed on your macOS, [install it here](https://brew.sh)_.
 
 * Create an IAM user, name it `terraform` _(ensure that the user has only programatic access to your AWS account)_ and grant this user `AdministratorAccess` permissions.
+
 * Copy the **secret access key** and **acces key ID** and save them in a notepad temporarily.
 
 * Run the `aws configure` command to have access to AWSCLI and paste the the **Access Keys** you copied when creating the `terraform` IAM user.
+
+![aws configure](./images/1.%20aws%20configure.png)
 
 * Create an `s3` bucket using the command shown below:
 
@@ -37,19 +40,27 @@ _**Note**: If you do not have homebrew installed on your macOS, [install it here
 aws s3api create-bucket --bucket <bucket_name> --region <aws_region>
 ```
 
+![create s3 bucket](./images/1.%20create-bucket.png)
+
 * Install python and boto3 using the following commands:
 
 ```sh
 brew install python
 ```
 
+![install python](./images/1.%20brew%20install%20python.png)
+
 ```sh
 python -m ensurepip
 ```
 
+![python -m ensurepip](./images/1.%20python%20-m%20ensurepip.png)
+
 ```sh
 pip install boto3
 ```
+
+![pip install boto3](./images/1.%20pip%20install%20boto3.png)
 
 ```sh
 python3 -m pip install --upgrade pip
