@@ -1,5 +1,7 @@
-# Automating AWS Infrastructure with IaC using Terraform
-This project shows the steps taken to automate AWS Infrascture with Infrastructure as Code using Teraform.
+# Automating AWS Infrastructure with IaC using Terraform Part 1
+This project shows the steps taken to automate AWS Infrascture with Infrastructure as Code using Teraform. We are going to use Terraform to build AWS Infrastructure for 2 website as shown in the diagram below:
+
+![architecture](./images/architecture.png)
 
 ## Prerequisites before you begin writing Terraform code
 * Open your terminal and install AWSCLI Version 2 using the commands shown below:
